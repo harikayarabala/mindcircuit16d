@@ -3,27 +3,32 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fb-deploy
-  labels:
-    app: facebook
-    env: lab
-
+  namespace: prod
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: facebook
-  replicas: 2
   template:
     metadata:
-      name: fb-pod
       labels:
         app: facebook
-        env: lab
-        tier: frontend
-        version: v1_AC
     spec:
       containers:
         - name: fb-pod-cont
           image: harikayarabala/cicd:9
           ports:
             - containerPort: 8080
-
+          # (Optional but recommended)
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
