@@ -26,4 +26,4 @@ spec:
           image: harikayarabala/cicd:9
           ports:
             - containerPort: 8080
-``
+
