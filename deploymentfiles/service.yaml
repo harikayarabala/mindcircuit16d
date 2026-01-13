@@ -1,19 +1,18 @@
 
----
 apiVersion: v1
 kind: Service
 metadata:
-   name: fb-lb-svc
-   labels:
-     app: facebook 
+  name: fb-lb-svc
+  namespace: prod           # <-- add this if your deployment is in prod
+  labels:
+    app: facebook
 spec:
   type: LoadBalancer
+  selector:
+    app: facebook           # <-- fix indentation; must align under selector
   ports:
-    - port: 80
-      targetPort: 8080 
+    - name: http            # optional but helpful
+      port: 80
+      targetPort: 8080
       protocol: TCP
 
-  selector:
-        app: facebook
-        
-      
