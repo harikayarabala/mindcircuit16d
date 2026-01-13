@@ -23,6 +23,6 @@ spec:
     spec:
       containers:
         - name: fb-pod-cont
-          image: harikayarabala/cicd:${BUILD_NUMBER}
+image: harikayarabala/cicd:9
           ports:
             - containerPort: 8080
